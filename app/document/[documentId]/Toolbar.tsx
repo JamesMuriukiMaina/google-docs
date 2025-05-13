@@ -1,6 +1,7 @@
 "use client";
-import { LucideIcon, Undo2Icon } from "lucide-react";
+import { type LucideIcon, Undo2Icon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useEditorStore } from "@/store/useEditorStore";
 
 interface ToolbarButtonProps {
   onClick?: () => void;
@@ -15,6 +16,7 @@ const ToolbarButton = ({
 }: ToolbarButtonProps) => {
   return (
     <button
+      type="button"
       onClick={onClick}
       className={cn(
         "flex items-center justify-center text-sm h-7 min-w-7 rounded-sm hover:bg-neutral-200/50",
@@ -34,12 +36,14 @@ type SectionsProps = {
 }[][];
 
 export default function Toolbar() {
+  const { editor } = useEditorStore();
+
   const sections: SectionsProps = [
     [
       {
         label: "undo",
         icon: Undo2Icon,
-        onClick: () => console.log("I love jimmie"),
+        onClick: () => editor?.chain().focus().undo().run(),
       },
     ],
   ];
