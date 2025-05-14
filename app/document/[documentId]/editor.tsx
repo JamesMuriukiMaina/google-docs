@@ -12,8 +12,10 @@ import TaskList from "@tiptap/extension-task-list";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import ImageResize from "tiptap-extension-resize-image";
-
+import Underline from "@tiptap/extension-underline";
 import { useEditorStore } from "@/store/useEditorStore";
+import FontFamily from "@tiptap/extension-font-family";
+import TextStyle from "@tiptap/extension-text-style";
 
 export default function Editor() {
   const { setEditor } = useEditorStore();
@@ -56,6 +58,8 @@ export default function Editor() {
       Heading.configure({
         levels: [1, 2, 3],
       }),
+      FontFamily,
+      TextStyle,
       TaskList,
       TaskItem.configure({
         nested: true,
@@ -69,6 +73,7 @@ export default function Editor() {
       Image,
       ImageResize,
       Dropcursor,
+      Underline,
       // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     ] as any[],
     content: `
