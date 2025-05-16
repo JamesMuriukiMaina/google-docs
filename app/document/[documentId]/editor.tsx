@@ -19,6 +19,7 @@ import Underline from "@tiptap/extension-underline";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import ImageResize from "tiptap-extension-resize-image";
+import TextAlign from "@tiptap/extension-text-align";
 
 export default function Editor() {
   const { setEditor } = useEditorStore();
@@ -68,6 +69,9 @@ export default function Editor() {
         defaultProtocol: "https",
       }),
       FontFamily,
+      TextAlign.configure({
+        types: ["heading", "paragraph"],
+      }),
       TextStyle,
       TaskList,
       TaskItem.configure({

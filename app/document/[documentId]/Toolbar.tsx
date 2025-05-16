@@ -21,6 +21,7 @@ import {
   Undo2Icon,
 } from "lucide-react";
 import Image from "@/custom plugins/Image";
+import Align from "@/custom plugins/Align";
 
 interface ToolbarButtonProps {
   onClick?: () => void;
@@ -157,8 +158,8 @@ export default function Toolbar() {
         <Image />
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         <Link />
-        {/* TODO:align */}
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
+        <Align />
         {/* TODO:Line height */}
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         {/* TODO:List */}
