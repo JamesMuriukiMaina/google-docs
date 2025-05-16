@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import Image from "@/custom plugins/Image";
 import Align from "@/custom plugins/Align";
+import List from "@/custom plugins/List";
 
 interface ToolbarButtonProps {
   onClick?: () => void;
@@ -164,6 +165,8 @@ export default function Toolbar() {
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         {/* TODO:List */}
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
+        <List />
+
         {sections[2].map((item) => (
           <ToolbarButton key={item.label} {...item} />
         ))}
