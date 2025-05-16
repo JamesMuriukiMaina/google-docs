@@ -3,6 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import FontFamily from "@/custom plugins/Font-family";
 import Headings from "@/custom plugins/Heading-level";
 import HightlightColor from "@/custom plugins/Hightlight-color";
+import Link from "@/custom plugins/Link";
 import Colors from "@/custom plugins/Text-color";
 import { cn } from "@/lib/utils";
 import { useEditorStore } from "@/store/useEditorStore";
@@ -19,6 +20,7 @@ import {
   UnderlineIcon,
   Undo2Icon,
 } from "lucide-react";
+import Image from "@/custom plugins/Image";
 
 interface ToolbarButtonProps {
   onClick?: () => void;
@@ -140,7 +142,6 @@ export default function Toolbar() {
         <Separator orientation="vertical" className={"h-6 bg-neutral-200"} />
         <FontFamily />
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
-        {/* TODO: Heading */}
         <Headings />
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         {/* TODO: font-size */}
@@ -148,14 +149,14 @@ export default function Toolbar() {
         {sections[1].map((item) => (
           <ToolbarButton key={item.label} {...item} />
         ))}
-        {/* TODO: Text-color */}
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         <Colors />
-        {/* TODO:Highlight color */}
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         <HightlightColor />
-        {/* TODO:Image */}
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
+        <Image />
+        <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
+        <Link />
         {/* TODO:align */}
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         {/* TODO:Line height */}
