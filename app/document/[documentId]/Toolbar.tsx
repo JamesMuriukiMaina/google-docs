@@ -24,6 +24,7 @@ import Image from "@/custom plugins/Image";
 import Align from "@/custom plugins/Align";
 import List from "@/custom plugins/List";
 import FontSize from "@/custom plugins/Font-size";
+import LineHeight from "@/custom plugins/Line-height";
 
 interface ToolbarButtonProps {
   onClick?: () => void;
@@ -161,8 +162,8 @@ export default function Toolbar() {
         <Link />
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         <Align />
-        {/* TODO:Line height */}
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
+        <LineHeight />
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         <List />
 

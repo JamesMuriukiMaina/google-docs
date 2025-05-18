@@ -16,10 +16,11 @@ import TaskList from "@tiptap/extension-task-list";
 import TextAlign from "@tiptap/extension-text-align";
 import TextStyle from "@tiptap/extension-text-style";
 // import Underline from "@tiptap/extension-underline";
+import { fontSizeExtension } from "@/extensions/font-size";
+import { LineHeightExtension } from "@/extensions/line-height";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import ImageResize from "tiptap-extension-resize-image";
-import { fontSizeExtension } from "@/extensions/font-size";
 
 export default function Editor() {
   const { setEditor } = useEditorStore();
@@ -74,6 +75,10 @@ export default function Editor() {
       }),
       TextStyle,
       TaskList,
+      LineHeightExtension.configure({
+        types: ["paragraph", "heading"],
+        defaultLineHeight: "normal",
+      }),
       TaskItem.configure({
         nested: true,
       }),
