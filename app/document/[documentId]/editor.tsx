@@ -21,6 +21,7 @@ import { LineHeightExtension } from "@/extensions/line-height";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import ImageResize from "tiptap-extension-resize-image";
+import Ruler from "./Ruler";
 
 export default function Editor() {
   const { setEditor } = useEditorStore();
@@ -120,9 +121,10 @@ export default function Editor() {
         "size-full  overflow-x-auto bg-[#F9FBFD] print:p-0 print:bg-white print:overflow-visible"
       }
     >
+      <Ruler />
       <div
         className={
-          "min-w-max flex  justify-center w-[816px] py-4 print:py-0 mx-auto print:w-full print:min-w-0"
+          "min-w-max flex -z-10 justify-center w-[816px] py-4 print:py-0 mx-auto print:w-full print:min-w-0"
         }
       >
         <EditorContent editor={editor} />
