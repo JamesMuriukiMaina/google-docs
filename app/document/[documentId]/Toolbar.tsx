@@ -23,6 +23,7 @@ import {
 import Image from "@/custom plugins/Image";
 import Align from "@/custom plugins/Align";
 import List from "@/custom plugins/List";
+import FontSize from "@/custom plugins/Font-size";
 
 interface ToolbarButtonProps {
   onClick?: () => void;
@@ -140,13 +141,12 @@ export default function Toolbar() {
           <ToolbarButton key={item.label} {...item} />
         ))}
 
-        {/* Ask Ai for assistance. The separator is not appearing */}
         <Separator orientation="vertical" className={"h-6 bg-neutral-200"} />
         <FontFamily />
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         <Headings />
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
-        {/* TODO: font-size */}
+        <FontSize />
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         {sections[1].map((item) => (
           <ToolbarButton key={item.label} {...item} />
@@ -163,7 +163,6 @@ export default function Toolbar() {
         <Align />
         {/* TODO:Line height */}
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
-        {/* TODO:List */}
         <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         <List />
 

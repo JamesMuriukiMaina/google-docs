@@ -2,24 +2,24 @@
 "use client";
 import { useEditorStore } from "@/store/useEditorStore";
 import { Color } from "@tiptap/extension-color";
-import Dropcursor from "@tiptap/extension-dropcursor";
 import FontFamily from "@tiptap/extension-font-family";
 import Heading from "@tiptap/extension-heading";
 import Hightlight from "@tiptap/extension-highlight";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
-import Table from "@tiptap/extension-table";
-import TableCell from "@tiptap/extension-table-cell";
-import TableHeader from "@tiptap/extension-table-header";
-import TableRow from "@tiptap/extension-table-row";
+// import Table from "@tiptap/extension-table";
+// import TableCell from "@tiptap/extension-table-cell";
+// import TableHeader from "@tiptap/extension-table-header";
+// import TableRow from "@tiptap/extension-table-row";
 import TaskItem from "@tiptap/extension-task-item";
 import TaskList from "@tiptap/extension-task-list";
+import TextAlign from "@tiptap/extension-text-align";
 import TextStyle from "@tiptap/extension-text-style";
-import Underline from "@tiptap/extension-underline";
+// import Underline from "@tiptap/extension-underline";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import ImageResize from "tiptap-extension-resize-image";
-import TextAlign from "@tiptap/extension-text-align";
+import { fontSizeExtension } from "@/extensions/font-size";
 
 export default function Editor() {
   const { setEditor } = useEditorStore();
@@ -77,18 +77,18 @@ export default function Editor() {
       TaskItem.configure({
         nested: true,
       }),
-      Table.configure({
-        resizable: true,
-      }),
-      TableRow,
-      TableHeader,
-      TableCell,
+      // Table.configure({
+      //   resizable: true,
+      // }),
+      // TableRow,
+      // TableHeader,
+      // TableCell,
       Image,
       ImageResize,
-      Dropcursor,
-      Underline,
+      // Underline,
       Hightlight.configure({ multicolor: true }),
       Color,
+      fontSizeExtension,
       // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     ] as any[],
     content: `
