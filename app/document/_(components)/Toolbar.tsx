@@ -135,7 +135,7 @@ export default function Toolbar() {
     <>
       <div
         className={
-          "bg-[#f1f4f9] px-2.5 py-0.5 flex items-center rounded-[24px] min-h-[40px] gap-x-0.5 overflow-x-auto "
+          "bg-[#f1f4f9] px-2.5 py-0.5 flex items-center rounded-[24px] min-h-[40px] gap-x-0.5 max-w-7xl overflow-x-auto "
         }
       >
         {sections[0].map((item) => (
