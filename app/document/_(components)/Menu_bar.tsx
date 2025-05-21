@@ -35,7 +35,11 @@ export default function MenuBar() {
   const { editor } = useEditorStore();
   /* Activate the comment below after re-installing the table extension */
   const insertTable = ({ rows, cols }: { rows: number; cols: number }) => {
-    // editor?.chain().focus().insertTable({ rows, cols  withHeaders:false}).run();
+    editor
+      ?.chain()
+      .focus()
+      .insertTable({ rows, cols, withHeaderRow: false })
+      .run();
   };
 
   const onDownload = (blob: Blob, fileName: string) => {
@@ -52,8 +56,6 @@ export default function MenuBar() {
     const blob = new Blob([JSON.stringify(content)], {
       type: "application/json",
     });
-
-    onDownload(blob, "document.json"); // TODO: Use document name;
   };
 
   const onSaveHTML = () => {
@@ -72,8 +74,6 @@ export default function MenuBar() {
     const blob = new Blob([content], {
       type: "text/plain",
     });
-
-    onDownload(blob, "document.txt"); // TODO: Use document name;
   };
 
   return (
@@ -136,7 +136,7 @@ export default function MenuBar() {
               <MenubarItem onClick={() => window.print()}>
                 <Printer className={"size-4 mr-2 inline"} />
                 Print
-                {/* TODO: Add the shortcuts using the MenubarShortcut component */}
+                <span>⌘P</span>
               </MenubarItem>
             </MenubarContent>
           </MenubarMenu>
@@ -152,12 +152,12 @@ export default function MenuBar() {
               <MenubarItem onClick={() => editor?.chain().focus().undo().run()}>
                 <Undo2Icon className={"size-4 mr-2 inline"} />
                 Undo
-                {/* TODO: Add the shortcuts using the MenubarShortcut component */}
+                <span>⌘Z</span>
               </MenubarItem>
               <MenubarItem onClick={() => editor?.chain().focus().redo().run()}>
                 <Redo2Icon className={"size-4 mr-2 inline"} />
                 Redo
-                {/* TODO: Add the shortcuts using the MenubarShortcut component */}
+                <span>⌘Y</span>
               </MenubarItem>
             </MenubarContent>
           </MenubarMenu>
@@ -210,7 +210,6 @@ export default function MenuBar() {
                 <MenubarSubTrigger>
                   <TextIcon className={" size-4 mr-2 inline"} />
                   Text
-                  {/* TODO: Add the shortcuts using the MenubarShortcut component */}
                 </MenubarSubTrigger>
                 <MenubarSubContent>
                   <MenubarItem
@@ -218,31 +217,30 @@ export default function MenuBar() {
                   >
                     <BoldIcon className={"size-4 mr-2 inline"} />
                     Bold
-                    {/* TODO: Add the shortcuts using the MenubarShortcut component */}
+                    <span>⌘B</span>
                   </MenubarItem>
                   <MenubarItem
                     onClick={() => editor?.chain().focus().toggleItalic().run()}
                   >
                     <ItalicIcon className={"size-4 mr-2 inline"} />
                     Italic
-                    {/* TODO: Add the shortcuts using the MenubarShortcut component */}
+                    <span>⌘I</span>
                   </MenubarItem>
                   <MenubarItem
                     onClick={() => {
-                      /* Activate the below comment after re-installing the underline extension */
-                      // editor?.chain().focus().toggleUnderline().run();
+                      editor?.chain().focus().toggleUnderline().run();
                     }}
                   >
                     <UnderlineIcon className={"size-4 mr-2 inline"} />
                     Underline
-                    {/* TODO: Add the shortcuts using the MenubarShortcut component */}
+                    <span>⌘U</span>
                   </MenubarItem>
                   <MenubarItem
                     onClick={() => editor?.chain().focus().toggleStrike().run()}
                   >
                     <StrikethroughIcon className={"size-4 mr-2 inline"} />
                     Strikethrough
-                    {/* TODO: Add the shortcuts using the MenubarShortcut component */}
+                    <span>⌘S</span>
                   </MenubarItem>
                 </MenubarSubContent>
               </MenubarSub>

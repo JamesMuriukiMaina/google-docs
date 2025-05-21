@@ -7,10 +7,28 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { templates } from "@/constants/templates";
+import { api } from "@/convex/_generated/api";
 import { cn } from "@/lib/utils";
+import { useMutation } from "convex/react";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function TemplatesGallery() {
-  const isCreating = false;
+  const router = useRouter();
+  const create = useMutation(api.document.create);
+
+  const [isCreating, setIsCreating] = useState(false);
+
+  const onTemplateClick = (title: string, initialContent: string) => {
+    setIsCreating(true);
+    create({ title, initialContent })
+      .then((documentId) => {
+        router.push(`/document/${documentId}`);
+      })
+      .finally(() => {
+        setIsCreating(false);
+      });
+  };
 
   return (
     <>
@@ -24,39 +42,37 @@ export default function TemplatesGallery() {
             <CarouselContent className={"-ml-4"}>
               {templates.map(({ id, label, imageURL }) => {
                 return (
-                  <>
-                    <CarouselItem
-                      key={id}
-                      className={
-                        "basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6 2xl:basis-[14.285714%] pl-4"
-                      }
+                  <CarouselItem
+                    key={id}
+                    className={
+                      "basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6 2xl:basis-[14.285714%] pl-4"
+                    }
+                  >
+                    <div
+                      className={cn(
+                        "aspect-3/4 flex flex-col gap-y-2.5",
+                        isCreating && "pointer-events-none opacity-50"
+                      )}
                     >
-                      <div
-                        className={cn(
-                          "aspect-3/4 flex flex-col gap-y-2.5",
-                          isCreating && "pointer-events-none opacity-50"
-                        )}
-                      >
-                        <button
-                          type="button"
-                          disabled={isCreating}
-                          onClick={() => {}}
-                          style={{
-                            backgroundImage: `url(${imageURL})`,
-                            backgroundSize: "cover",
-                            backgroundPosition: "center",
-                            backgroundRepeat: "no-repeat",
-                          }}
-                          className={
-                            "size-full border hover:border-blue-500 rounded-sm hover:bg-white/50 transition flex flex-col items-center justify-center gap-y-4 bg-white"
-                          }
-                        />
-                        <p className={"text-sm font-medium truncate"}>
-                          {label}
-                        </p>
-                      </div>
-                    </CarouselItem>
-                  </>
+                      <button
+                        type="button"
+                        disabled={isCreating}
+                        onClick={() =>
+                          onTemplateClick(label, "")
+                        } /*TODO:  App Proper initial content */
+                        style={{
+                          backgroundImage: `url(${imageURL})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                          backgroundRepeat: "no-repeat",
+                        }}
+                        className={
+                          "size-full border hover:border-blue-500 rounded-sm hover:bg-white/50 transition flex flex-col items-center justify-center gap-y-4 bg-white"
+                        }
+                      />
+                      <p className={"text-sm font-medium truncate"}>{label}</p>
+                    </div>
+                  </CarouselItem>
                 );
               })}
             </CarouselContent>
