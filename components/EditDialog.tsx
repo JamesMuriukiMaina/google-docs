@@ -14,6 +14,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
+import { toast } from "sonner";
 import { Input } from "./ui/input";
 
 interface RenameDialog {
@@ -36,10 +37,12 @@ export default function RenameDialog({
     e.preventDefault();
     setIsRenaming(true);
 
-    edit({ id: documentId, title: title.trim() || "Untitled" }).finally(() => {
-      setIsRenaming(false);
-      setIsOpen(false);
-    });
+    edit({ id: documentId, title: title.trim() || "Untitled" })
+      .catch(() => toast("something went wrong"))
+      .finally(() => {
+        setIsRenaming(false);
+        setIsOpen(false);
+      });
   };
 
   return (

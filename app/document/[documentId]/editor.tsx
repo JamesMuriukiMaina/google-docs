@@ -27,6 +27,7 @@ export default function Editor() {
   const { setEditor } = useEditorStore();
 
   const editor = useEditor({
+    autofocus: true,
     immediatelyRender: false,
     onCreate: ({ editor }) => {
       setEditor(editor);

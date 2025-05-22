@@ -3,6 +3,7 @@ import Logo from "@/public/logo.svg";
 import Link from "next/link";
 import DocumentInput from "./Document_input";
 import MenuBar from "./Menu_bar";
+import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 
 export default function Navbar() {
   return (
@@ -20,6 +21,15 @@ export default function Navbar() {
             {/* Menu Bar */}
             <MenuBar />
           </div>
+        </div>
+        <div className={"flex gap-x-3 items-center pl-6"}>
+          <OrganizationSwitcher
+            afterCreateOrganizationUrl={"/"}
+            afterLeaveOrganizationUrl="/"
+            afterSelectPersonalUrl={"/"}
+            afterSelectOrganizationUrl={"/"}
+          />
+          <UserButton />
         </div>
       </nav>
     </>
