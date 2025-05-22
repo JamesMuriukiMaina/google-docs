@@ -3,9 +3,8 @@
 import Navbar from "@/app/(home)/(components)/Navbar";
 import { api } from "@/convex/_generated/api";
 import { usePaginatedQuery } from "convex/react";
-import TemplatesGallery from "./(components)/Templates";
-import Link from "next/link";
 import DocumentsTable from "./(components)/DocumentsTable";
+import TemplatesGallery from "./(components)/Templates";
 
 export default function Home() {
   const { results, status, loadMore } = usePaginatedQuery(
@@ -28,9 +27,6 @@ export default function Home() {
           status={status}
           loadMore={loadMore}
         />
-        <span>
-          <Link href={"/document/132"}>click me</Link>
-        </span>
       </div>
     </>
   );
