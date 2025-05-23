@@ -3,6 +3,10 @@
 import { fontSizeExtension } from "@/extensions/font-size";
 import { LineHeightExtension } from "@/extensions/line-height";
 import { useEditorStore } from "@/store/useEditorStore";
+import {
+  FloatingToolbar,
+  useLiveblocksExtension,
+} from "@liveblocks/react-tiptap";
 import { Color } from "@tiptap/extension-color";
 import FontFamily from "@tiptap/extension-font-family";
 import Heading from "@tiptap/extension-heading";
@@ -22,8 +26,10 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import ImageResize from "tiptap-extension-resize-image";
 import Ruler from "../_(components)/Ruler";
+import Threads from "./Threads";
 
 export default function Editor() {
+  const liveblocks = useLiveblocksExtension();
   const { setEditor } = useEditorStore();
 
   const editor = useEditor({
@@ -62,7 +68,10 @@ export default function Editor() {
       },
     },
     extensions: [
-      StarterKit,
+      liveblocks,
+      StarterKit.configure({
+        history: false,
+      }),
       Heading.configure({
         levels: [1, 2, 3],
       }),
@@ -113,6 +122,8 @@ export default function Editor() {
         }
       >
         <EditorContent editor={editor} />
+        <Threads editor={editor} />
+        <FloatingToolbar editor={editor} />
       </div>
     </div>
   );

@@ -114,8 +114,8 @@ export default function Toolbar() {
       {
         label: "comment",
         icon: MessageSquarePlusIcon,
-        onClick: () => console.log("Who clicked the master"),
-        isActive: false, // TODO: Enable this functionality.
+        onClick: () => editor?.chain().focus().addPendingComment().run(),
+        isActive: editor?.isActive("liveblocksCommentMarks"),
       },
       {
         label: "list todo",
