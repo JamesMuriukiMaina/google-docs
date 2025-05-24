@@ -1,10 +1,18 @@
 import { useRef, useState } from "react";
 import Markers from "./Markers";
+import { useMutation, useStorage } from "@liveblocks/react/suspense";
 
 export default function Ruler() {
   const markers = Array.from({ length: 83 }, (_, i) => i);
-  const [leftMargin, setLeftMargin] = useState(56);
-  const [rightMargin, setRightMargin] = useState(56);
+  const leftMargin = useStorage((root) => root.leftMargin);
+  const setLeftMargin = useMutation(({ storage }, position: number) => {
+    storage.set("leftMargin", position);
+  }, []);
+
+  const rightMargin = useStorage((root) => root.rightMargin);
+  const setRightMargin = useMutation(({ storage }, position: number) => {
+    storage.set("rightMargin", position);
+  }, []);
 
   const [isDraggingLeft, setIsDraggingLeft] = useState(false);
   const [isDraggingRight, setIsDraggingRight] = useState(false);
@@ -111,17 +119,15 @@ export default function Ruler() {
                   )}
                   {marker % 5 === 0 && marker % 10 !== 0 && (
                     <div
-                        className={
-                          "absolute bottom-0 w-[1px] h-1.5 bg-neutral-500"
-                        }
-                      />
+                      className={
+                        "absolute bottom-0 w-[1px] h-1.5 bg-neutral-500"
+                      }
+                    />
                   )}
                   {marker % 5 !== 0 && (
                     <div
-                        className={
-                          "absolute bottom-0 w-[1px] h-1 bg-neutral-500"
-                        }
-                      />
+                      className={"absolute bottom-0 w-[1px] h-1 bg-neutral-500"}
+                    />
                   )}
                 </div>
               );

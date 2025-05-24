@@ -9,7 +9,8 @@ import {
 import { useParams } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { toast } from "sonner";
-import { getUsers } from "./actions";
+import { getUsers, getDocuments } from "./actions";
+import { Id } from "@/convex/_generated/dataModel";
 
 type Users = { id: string; name: string; avatar: string };
 
@@ -33,7 +34,16 @@ export function Room({ children }: { children: ReactNode }) {
 
   return (
     <LiveblocksProvider
-      authEndpoint={"/api/liveblocks-auth"}
+      authEndpoint={async () => {
+        const authEndpoint = "/api/liveblocks-auth";
+        const room = params.documentId as string;
+
+        const response = await fetch(authEndpoint, {
+          method: "POST",
+          body: JSON.stringify({ room }),
+        });
+        return await response.json();
+      }}
       throttle={16}
       resolveUsers={({ userIds }) => {
         return userIds.map(
@@ -50,9 +60,19 @@ export function Room({ children }: { children: ReactNode }) {
 
         return filteredUsers.map((user) => user.id);
       }}
-      resolveRoomsInfo={() => []}
+      resolveRoomsInfo={async ({ roomIds }) => {
+        const documents = await getDocuments(roomIds as Id<"documents">[]);
+
+        return documents.map((document) => ({
+          id: document.id,
+          name: document.name,
+        }));
+      }}
     >
-      <RoomProvider id={params.documentId as string}>
+      <RoomProvider
+        id={params.documentId as string}
+        initialStorage={{ leftMargin: 56, rightMargin: 56 }}
+      >
         <ClientSideSuspense
           fallback={<FullScreenLoader label="Room loading" />}
         >

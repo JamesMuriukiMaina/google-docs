@@ -27,10 +27,13 @@ import StarterKit from "@tiptap/starter-kit";
 import ImageResize from "tiptap-extension-resize-image";
 import Ruler from "../_(components)/Ruler";
 import Threads from "./Threads";
+import { useStorage } from "@liveblocks/react/suspense";
 
 export default function Editor() {
   const liveblocks = useLiveblocksExtension();
   const { setEditor } = useEditorStore();
+  const leftMargin = useStorage((root) => root.leftMargin);
+  const rightMargin = useStorage((root) => root.rightMargin);
 
   const editor = useEditor({
     autofocus: true,
@@ -62,7 +65,9 @@ export default function Editor() {
 
     editorProps: {
       attributes: {
-        style: "padding-left:56px; padding-right: 56px",
+        style: `padding-left:${leftMargin ?? 56}px; padding-right: ${
+          rightMargin ?? 56
+        }px`,
         class:
           "focus:outline-none print:border-0 bg-white border border-[#c7c7c7] flex flex-col min-h-[1054px] w-[816px] pt-10 pr-14 pb-10 cursor-text",
       },
