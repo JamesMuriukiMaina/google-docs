@@ -4,6 +4,7 @@ import Link from "next/link";
 import DocumentInput from "./Document_input";
 import MenuBar from "./Menu_bar";
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
+import Avatars from "./Avatars";
 
 export default function Navbar() {
   return (
@@ -23,6 +24,7 @@ export default function Navbar() {
           </div>
         </div>
         <div className={"flex gap-x-3 items-center pl-6"}>
+          <Avatars />
           <OrganizationSwitcher
             afterCreateOrganizationUrl={"/"}
             afterLeaveOrganizationUrl="/"

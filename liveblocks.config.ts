@@ -22,8 +22,8 @@ declare global {
       // biome-ignore lint/complexity/noBannedTypes: <explanation>
       info: {
         // Example properties, for useSelf, useUser, useOthers, etc.
-        // name: string;
-        // avatar: string;
+        name: string;
+        avatar: string;
       };
     };
 

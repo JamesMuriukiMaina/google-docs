@@ -7,7 +7,7 @@ import {
   RoomProvider,
 } from "@liveblocks/react/suspense";
 import { useParams } from "next/navigation";
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { toast } from "sonner";
 import { getUsers } from "./actions";
 
@@ -17,24 +17,19 @@ export function Room({ children }: { children: ReactNode }) {
   const [users, setUser] = useState<Users[]>([]);
   const params = useParams();
 
-  const fetchUsers = useMemo(
-    () => async () => {
+  useEffect(() => {
+    (async function () {
       try {
         const userList = await getUsers();
-        console.log(userList);
+
         setUser(userList);
       } catch (error) {
-        toast.error("Failed to fetch users");
+        if (error instanceof Error) {
+          toast.error(`Failed to fetch users ${error.message}`);
+        }
       }
-    },
-    []
-  );
-
-  useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
-
-  console.log(users);
+    })();
+  }, []);
 
   return (
     <LiveblocksProvider
