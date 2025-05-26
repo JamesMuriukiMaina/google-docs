@@ -29,8 +29,16 @@ import Ruler from "../_(components)/Ruler";
 import Threads from "./Threads";
 import { useStorage } from "@liveblocks/react/suspense";
 
-export default function Editor() {
-  const liveblocks = useLiveblocksExtension();
+interface EditorProps {
+  initialContent?: string | undefined;
+}
+
+export default function Editor({ initialContent }: EditorProps) {
+  const liveblocks = useLiveblocksExtension({
+    initialContent,
+    offlineSupport_experimental: true,
+  });
+
   const { setEditor } = useEditorStore();
   const leftMargin = useStorage((root) => root.leftMargin);
   const rightMargin = useStorage((root) => root.rightMargin);

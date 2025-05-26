@@ -1,12 +1,12 @@
-import Image from "next/image";
-import Logo from "@/public/logo.svg";
-import Link from "next/link";
-import DocumentInput from "./Document_input";
-import MenuBar from "./Menu_bar";
-import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
-import Avatars from "./Avatars";
-import Inbox from "./Inbox";
 import type { Doc } from "@/convex/_generated/dataModel";
+import Logo from "@/public/logo.svg";
+import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
+import Image from "next/image";
+import Link from "next/link";
+import Avatars from "./Avatars";
+import DocumentInput from "./Document_input";
+import Inbox from "./Inbox";
+import MenuBar from "./Menu_bar";
 
 interface NavbarProps {
   data: Doc<"documents">;

@@ -40,7 +40,7 @@ export default function TemplatesGallery() {
           <Carousel>
             <CarouselPrevious />
             <CarouselContent className={"-ml-4"}>
-              {templates.map(({ id, label, imageURL }) => {
+              {templates.map(({ id, label, imageURL, initialContent }) => {
                 return (
                   <CarouselItem
                     key={id}
@@ -57,9 +57,7 @@ export default function TemplatesGallery() {
                       <button
                         type="button"
                         disabled={isCreating}
-                        onClick={() =>
-                          onTemplateClick(label, "")
-                        } /*TODO:  App Proper initial content */
+                        onClick={() => onTemplateClick(label, initialContent)}
                         style={{
                           backgroundImage: `url(${imageURL})`,
                           backgroundSize: "cover",

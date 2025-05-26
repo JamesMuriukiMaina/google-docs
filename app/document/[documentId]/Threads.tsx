@@ -1,5 +1,5 @@
 import type { Editor } from "@tiptap/react";
-import { useThreads } from "@liveblocks/react/suspense";
+import { ClientSideSuspense, useThreads } from "@liveblocks/react/suspense";
 import {
   AnchoredThreads,
   FloatingComposer,
@@ -11,6 +11,16 @@ interface ThreadsProps {
 }
 
 export default function Threads({ editor }: ThreadsProps) {
+  return (
+    <>
+      <ClientSideSuspense fallback={null}>
+        <ThreadsList editor={editor} />
+      </ClientSideSuspense>
+    </>
+  );
+}
+
+function ThreadsList({ editor }: ThreadsProps) {
   const { threads } = useThreads({ query: { resolved: false } });
   return (
     <>
