@@ -1,6 +1,6 @@
 "use server";
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
+import type { Id } from "@/convex/_generated/dataModel";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { ConvexHttpClient } from "convex/browser";
 
@@ -12,6 +12,7 @@ interface SessionClaims {
   };
 }
 
+// biome-ignore lint/style/noNonNullAssertion: <explanation>
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 export async function getDocuments(ids: Id<"documents">[]) {
   return convex.query(api.document.getByIds, { ids });

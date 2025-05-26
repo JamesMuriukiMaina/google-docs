@@ -1,29 +1,35 @@
-// eslint-disable no-unused-vars
-import Editor from "./editor";
-import Navbar from "../_(components)/Navbar";
-import Toolbar from "../_(components)/Toolbar";
-import { Room } from "./Room";
+import type { Id } from "@/convex/_generated/dataModel";
+import { auth } from "@clerk/nextjs/server";
+import Document from "./documents";
+import { preloadQuery } from "convex/nextjs";
+import { api } from "@/convex/_generated/api";
 
-interface Id {
-  params: Promise<{ documentId: string }>;
+interface DocumentIdProps {
+  params: Promise<{ documentId: Id<"documents"> }>;
 }
 
-export default async function DocumentId({ params }: Id) {
+export default async function DocumentId({ params }: DocumentIdProps) {
+  const { documentId } = await params;
+
+  const { getToken } = await auth();
+
+  const token = (await getToken({ template: "convex" })) ?? undefined;
+
+  if (!token) {
+    throw new Error("Unauthorized");
+  }
+
+  const preloadedDocument = await preloadQuery(
+    api.document.getById,
+    {
+      id: documentId,
+    },
+    { token }
+  );
+
   return (
-    <Room>
-      <div className={"min-h-screen bg-[#FAFBFD]"}>
-        <div
-          className={
-            "flex flex-col px-4 pt-2 gap-y-2 fixed top-0 left-0 z-10 bg-[#FAFBFD] print:hidden w-full"
-          }
-        >
-          <Navbar />
-          <Toolbar />
-        </div>
-        <div className={"pt-[114px] print:pt-0"}>
-          <Editor />
-        </div>
-      </div>
-    </Room>
+    <>
+      <Document preloadedDocument={preloadedDocument} />
+    </>
   );
 }

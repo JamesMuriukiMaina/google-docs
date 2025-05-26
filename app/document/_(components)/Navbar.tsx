@@ -6,8 +6,13 @@ import MenuBar from "./Menu_bar";
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import Avatars from "./Avatars";
 import Inbox from "./Inbox";
+import type { Doc } from "@/convex/_generated/dataModel";
 
-export default function Navbar() {
+interface NavbarProps {
+  data: Doc<"documents">;
+}
+
+export default function Navbar({ data }: NavbarProps) {
   return (
     <>
       <nav className={"flex items-center justify-between"}>
@@ -18,10 +23,10 @@ export default function Navbar() {
 
           <div className={"flex flex-col"}>
             {/* Document Input */}
-            <DocumentInput />
+            <DocumentInput data={data} />
 
             {/* Menu Bar */}
-            <MenuBar />
+            <MenuBar data={data} />
           </div>
         </div>
         <div className={"flex gap-x-3 items-center pl-6"}>

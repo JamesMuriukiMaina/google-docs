@@ -10,6 +10,7 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from "@/components/ui/menubar";
+import type { Doc } from "@/convex/_generated/dataModel";
 import { useEditorStore } from "@/store/useEditorStore";
 import {
   BoldIcon,
@@ -31,9 +32,13 @@ import {
 } from "lucide-react";
 import { BsFilePdf } from "react-icons/bs";
 
-export default function MenuBar() {
+interface NavbarProps {
+  data: Doc<"documents">;
+}
+
+export default function MenuBar({ data }: NavbarProps) {
   const { editor } = useEditorStore();
-  /* Activate the comment below after re-installing the table extension */
+
   const insertTable = ({ rows, cols }: { rows: number; cols: number }) => {
     editor
       ?.chain()
@@ -56,6 +61,7 @@ export default function MenuBar() {
     const blob = new Blob([JSON.stringify(content)], {
       type: "application/json",
     });
+    onDownload(blob, `${data.title}.json`);
   };
 
   const onSaveHTML = () => {
@@ -65,7 +71,7 @@ export default function MenuBar() {
       type: "text/html",
     });
 
-    onDownload(blob, "document.html"); // TODO: Use document name;
+    onDownload(blob, `${data.title}.html`);
   };
 
   const onSaveText = () => {
@@ -74,6 +80,7 @@ export default function MenuBar() {
     const blob = new Blob([content], {
       type: "text/plain",
     });
+    onDownload(blob, `${data.title}.txt`);
   };
 
   return (
