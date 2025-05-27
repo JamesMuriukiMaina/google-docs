@@ -10,7 +10,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { toast } from "sonner";
 import { getUsers, getDocuments } from "./actions";
-import { Id } from "@/convex/_generated/dataModel";
+import type { Id } from "@/convex/_generated/dataModel";
 
 type Users = { id: string; name: string; avatar: string };
 
@@ -19,7 +19,7 @@ export function Room({ children }: { children: ReactNode }) {
   const params = useParams();
 
   useEffect(() => {
-    (async function () {
+    (async () => {
       try {
         const userList = await getUsers();
 
@@ -51,7 +51,7 @@ export function Room({ children }: { children: ReactNode }) {
         );
       }}
       resolveMentionSuggestions={({ text }) => {
-        let filteredUsers = users;
+        const filteredUsers = users;
         if (text) {
           filteredUsers.filter((user) =>
             user.name.toLowerCase().includes(text.toLowerCase())

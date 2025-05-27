@@ -2,11 +2,21 @@ import { Liveblocks } from "@liveblocks/node";
 import { ConvexHttpClient } from "convex/browser";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { api } from "@/convex/_generated/api";
+import { PALETTE as palette } from "@/constants/colors";
 
 // biome-ignore lint/style/noNonNullAssertion: <explanation>
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 // biome-ignore lint/style/noNonNullAssertion: <explanation>
 const liveblocks = new Liveblocks({ secret: process.env.LIVEBLOCKS_SECRET! });
+
+function pickColor(str: string) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return palette[Math.abs(hash) % palette.length];
+}
+
 export async function POST(req: Request) {
   const { sessionClaims } = await auth();
 
@@ -41,12 +51,8 @@ export async function POST(req: Request) {
 
   const name =
     user.fullName ?? user.primaryEmailAddress?.emailAddress ?? "Anonymous";
-  const nameToNumber = name
-    .split("")
-    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
 
-  const hue = Math.abs(nameToNumber) % 360;
-  const color = `hsl("${hue}, 80%, 60%")`;
+  const color = pickColor(name);
 
   const session = liveblocks.prepareSession(user.id, {
     userInfo: {

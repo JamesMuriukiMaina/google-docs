@@ -34,15 +34,13 @@ function InboxMenu() {
           <Button variant={"ghost"} className={"relative"} size={"icon"}>
             <BellIcon className={"size-5"} />
             {inboxNotifications.length > 0 && (
-              <>
-                <span
-                  className={
-                    "absolute -top-1 -right-1 rounded-full size-4 bg-sky-500 text-xs flex items-center justify-center text-white"
-                  }
-                >
-                  {inboxNotifications.length}
-                </span>
-              </>
+              <span
+                className={
+                  "absolute -top-1 -right-1 rounded-full size-4 bg-sky-500 text-xs flex items-center justify-center text-white"
+                }
+              >
+                {inboxNotifications.length}
+              </span>
             )}
           </Button>
         </DropdownMenuTrigger>
