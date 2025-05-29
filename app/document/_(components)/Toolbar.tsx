@@ -1,9 +1,9 @@
 "use client";
-import FontFamily from "@/custom plugins/Font-family";
-import Headings from "@/custom plugins/Heading-level";
-import HightlightColor from "@/custom plugins/Hightlight-color";
-import Link from "@/custom plugins/Link";
-import Colors from "@/custom plugins/Text-color";
+import FontFamily from "@/custom-plugins/Font-family";
+import Headings from "@/custom-plugins/Heading-level";
+import HightlightColor from "@/custom-plugins/Highlight-color";
+import Link from "@/custom-plugins/Link";
+import Colors from "@/custom-plugins/Text-color";
 import { cn } from "@/lib/utils";
 import { useEditorStore } from "@/store/useEditorStore";
 import {
@@ -19,11 +19,11 @@ import {
   UnderlineIcon,
   Undo2Icon,
 } from "lucide-react";
-import ImageUpload from "@/custom plugins/Image";
-import Align from "@/custom plugins/Align";
-import List from "@/custom plugins/List";
-import FontSize from "@/custom plugins/Font-size";
-import LineHeight from "@/custom plugins/Line-height";
+import ImageUpload from "@/custom-plugins/Image";
+import Align from "@/custom-plugins/Align";
+import List from "@/custom-plugins/List";
+import FontSize from "@/custom-plugins/Font-size";
+import LineHeight from "@/custom-plugins/Line-height";
 
 interface ToolbarButtonProps {
   onClick?: () => void;
