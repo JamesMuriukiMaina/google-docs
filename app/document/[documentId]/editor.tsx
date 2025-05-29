@@ -118,8 +118,7 @@ export default function Editor({ initialContent }: EditorProps) {
       Hightlight.configure({ multicolor: true }),
       Color,
       fontSizeExtension,
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    ] as any[],
+    ],
   });
 
   return (

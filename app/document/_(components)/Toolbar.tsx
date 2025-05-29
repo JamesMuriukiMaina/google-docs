@@ -1,5 +1,4 @@
 "use client";
-import { Separator } from "@/components/ui/separator";
 import FontFamily from "@/custom plugins/Font-family";
 import Headings from "@/custom plugins/Heading-level";
 import HightlightColor from "@/custom plugins/Hightlight-color";
@@ -20,7 +19,7 @@ import {
   UnderlineIcon,
   Undo2Icon,
 } from "lucide-react";
-import Image from "@/custom plugins/Image";
+import ImageUpload from "@/custom plugins/Image";
 import Align from "@/custom plugins/Align";
 import List from "@/custom plugins/List";
 import FontSize from "@/custom plugins/Font-size";
@@ -142,29 +141,18 @@ export default function Toolbar() {
           <ToolbarButton key={item.label} {...item} />
         ))}
 
-        <Separator orientation="vertical" className={"h-6 bg-neutral-200"} />
         <FontFamily />
-        <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         <Headings />
-        <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         <FontSize />
-        <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         {sections[1].map((item) => (
           <ToolbarButton key={item.label} {...item} />
         ))}
-        <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         <Colors />
-        <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         <HightlightColor />
-        <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
-        <Image />
-        <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
+        <ImageUpload />
         <Link />
-        <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         <Align />
-        <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         <LineHeight />
-        <Separator orientation="vertical" className={"h-6 bg-indigo-500"} />
         <List />
 
         {sections[2].map((item) => (

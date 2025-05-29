@@ -10,7 +10,6 @@ import {
   AlignJustifyIcon,
   AlignLeftIcon,
   AlignRightIcon,
-  HighlighterIcon,
 } from "lucide-react";
 
 export default function Align() {

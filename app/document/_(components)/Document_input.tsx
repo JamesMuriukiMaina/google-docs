@@ -17,7 +17,6 @@ export default function DocumentInput({ data }: NavbarProps) {
   const status = useStatus();
   const [value, setValue] = useState(data.title);
   const [isEditing, setIsEditing] = useState(false);
-  const [isError, setIsError] = useState(false);
   const [isPending, setIsPending] = useState(false);
 
   const inputRef = useRef<HTMLInputElement | null>(null);

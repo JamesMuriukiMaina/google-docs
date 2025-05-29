@@ -17,7 +17,7 @@ import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import { ImageIcon, SearchIcon, UploadIcon } from "lucide-react";
 import { useState } from "react";
 
-export default function Image() {
+export default function ImageUpload() {
   const { editor } = useEditorStore();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState("");

@@ -46,6 +46,8 @@ export async function getUsers() {
       avatar: user.imageUrl,
     }));
   } catch (error) {
+    if (error instanceof Error)
+      throw new Error(`Failed to fetch users, ${error.message}`);
     throw new Error("Failed to fetch users");
   }
 }
